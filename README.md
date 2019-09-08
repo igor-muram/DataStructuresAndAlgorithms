@@ -1,4 +1,4 @@
 # DataStructuresAndAlgorithms
-Программа посвящена решению задачи по графам: "Найти длину самого длинного простого пути от города А до города B в заданной системе односторонних дорог".
-Пример входного файла и результаты работы программы для данной систем дорог добавлены в проект.
-В первой строке входного файла указан город отправления, во второй строке указан город назначения, далее указаны все возможные пути между городами.
+The program is dedicated to solving the problem of graph theory: "Find the length of the longest simple path from city A to city B in a given system of one-way roads."
+An example of the input file and the results of the program for this road system are added to the project.
+In the first line of the input file, the city of departure is indicated, in the second line the city of destination is indicated, then all possible routes between the cities are indicated.
