@@ -1,0 +1,4 @@
+
+*.ipch
+.vs/DataStructuresAndAlgorithms/v16/.suo
+*.db
