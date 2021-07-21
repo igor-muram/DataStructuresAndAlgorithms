@@ -1,4 +1,4 @@
-# DataStructuresAndAlgorithms
+# Data Structures And Algorithms
 Solving the problem of graph theory:<br>
 "Find the length of the longest simple path from city A to city B in a given system of one-way roads."<br>
 An example of the input file and the results of the program for this road system are added to the project.<br>
