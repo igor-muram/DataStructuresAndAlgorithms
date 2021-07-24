@@ -468,7 +468,7 @@ The longest simple path from НСК to ЕКБ: НСК — ТУЛА — ПЕРМ�
 ## Test 14
 `Purpose:` A big test with all possible situations.<br>
 `Input:`<br>
-\* too large *
+\* too large for README, watch Input.txt *
 
 ![image](https://user-images.githubusercontent.com/54866075/126881173-d4a5c103-2af1-4a25-9ece-9431d8d11e6e.png)
 
