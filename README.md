@@ -7,29 +7,23 @@ Solve the problem of graph theory:<br>
 
 ## Initial problem data
 
-<ul>
-  <li><code>S</code> is a road system, <code>S = {(name_1[i], name_2[i], weight[i]) | name_1[i], name_2[i] ∈ <сity>, weight[i] ∈ R+, i ∈ N}</code></li>
-  <li><code><сity> ::= {g[j] | g[j] ∈ {subset of Russian and Latin letters} ∪ N, j ∈ N}</code></li>
-  <li><code>name_1[i]</code> is the city specifying the beginning of the road</li>
-  <li><code>name_2[i]</code> is the city specifying the end of the road</li>
-  <li><code>weight[i]</code> is the length of the road between cities <code>name_1[i]</code> and <code>name_2[i]</code></li>
-</ul>
+  * `S` is a road system, `S = {(name_1[i], name_2[i], weight[i]) | name_1[i], name_2[i] ∈ <сity>, weight[i] ∈ R+, i ∈ N}`
+  * `<сity> ::= {g[j] | g[j] ∈ {subset of Russian and Latin letters} ∪ N, j ∈ N}`
+  * `name_1[i]` is the city specifying the beginning of the road
+  * `name_2[i]` is the city specifying the end of the road
+  * `weight[i]` is the length of the road between cities `name_1[i]` and `name_2[i]`
 
 ## Result
 
-<ul>
-  <li><code>max ∈ R+</code></li>
-  <li><code>Road = {a[i] | a[i] ∈ <city>, i > 1, i ∈ N} || {the message that the desired road does not exist}</code></li>
-</ul>
+  * `max ∈ R+`
+  * `Road = {a[i] | a[i] ∈ <city>, i > 1, i ∈ N} || {the message that the desired road does not exist}`
 
 ## External representation of the one-way road system
 
-<ul>
-  <li>An example of the input file and the results of the program for this road system are added to the project.</li>
-  <li>The departure city is on the first line of the input file.</li>
-  <li>Destination city is on the second line.</li>
-  <li>All possible routes between cities are indicated after.</li>
-</ul>
+  * An example of the input file and the results of the program for this road system are added to the project.
+  * The departure city is on the first line of the input file.
+  * Destination city is on the second line.
+  * All possible routes between cities are indicated after.
 
 `<road system> ::= <departure city> {new line} <destination city> {new line} <road list>`<br>
 `<departure city> ::= <city>`<br>
@@ -45,21 +39,17 @@ Input file example:
 
 ![image](https://user-images.githubusercontent.com/54866075/126553280-0432899e-ed85-4d84-aaa9-e2a7cab7f7ac.png)
 
-<ul>
-  <li>In the external view of the road system, isolated cities are not displayed.</li>
-  <li>Also in the input file we will not specify the number of cities in the road system. It will allow you not to make restrictions on the number of cities in the road system, as well as make it easier for the user to enter the input data. First, there will be no need to count the number of cities before entering the road system, and if you change the road system, there will be no need to recalculate it. Second, the amount of data needed to get a result will be reduced.</li>
-</ul>
+  * In the external view of the road system, isolated cities are not displayed.
+  * Also in the input file we will not specify the number of cities in the road system. It will allow you not to make restrictions on the number of cities in the road system, as well as make it easier for the user to enter the input data. First, there will be no need to count the number of cities before entering the road system, and if you change the road system, there will be no need to recalculate it. Second, the amount of data needed to get a result will be reduced.
 
 ## Internal representation of the road system
 
-<ul>
-  <li>Since in this problem we work with a system of roads, in most cases the graph will be sparse, i.e. the set of edges will be much smaller than the set of vertices. So the adjacency matrix and incident matrix of the graph will consist mostly of zeros, which leads to unnecessary waste of memory.</li>
-  <li>The inconvenience of the list of graph edges is the large number of steps needed to get the set of vertices to which the edges lead from the given vertex.</li>
-  <li>So we represent the original road system by its adjacency list, since it gives a compact representation for sparse graphs.</li>
-  <li>In order not to complicate the lists of adjacency we mark the vertex by a number instead of the name of the city. The vertices of the graph will be numbered starting from zero.</li>
-  <li>List of adjacent vertices shall be a linear one-way list. This will not impose restrictions on the number of roads from each city.</li>
-  <li>City names will be represented by a vector of strings, and the adjacency list of the graph by a vector of structures, which allows to make no restriction on the number of cities in the road system.</li>
-</ul>
+  * Since in this problem we work with a system of roads, in most cases the graph will be sparse, i.e. the set of edges will be much smaller than the set of vertices. So the adjacency matrix and incident matrix of the graph will consist mostly of zeros, which leads to unnecessary waste of memory.
+  * The inconvenience of the list of graph edges is the large number of steps needed to get the set of vertices to which the edges lead from the given vertex.
+  * So we represent the original road system by its adjacency list, since it gives a compact representation for sparse graphs.
+  * In order not to complicate the lists of adjacency we mark the vertex by a number instead of the name of the city. The vertices of the graph will be numbered starting from zero.
+  * List of adjacent vertices shall be a linear one-way list. This will not impose restrictions on the number of roads from each city.
+  * City names will be represented by a vector of strings, and the adjacency list of the graph by a vector of structures, which allows to make no restriction on the number of cities in the road system.
 
 – adjacency structure (lists of adjacent vertices of the graph):
 
@@ -83,30 +73,26 @@ Input file example:
 
 ## Mathematical model
 
-<ul>
-  <li>The mathematical model of a one-way road system is an oriented, weighted, labeled, cyclic, not necessarily connected, multi- and pseudograph <code>G&nbsp;=&nbsp;(V,&nbsp;E)</code> with weight function <code>w:&nbsp;E&nbsp;→&nbsp;R</code>, where <code>w(u,&nbsp;v)&nbsp;≥&nbsp;0</code> for all <code>(u,&nbsp;v)&nbsp;∈&nbsp;E</code>.</li>
-  <li>To solve problem, it is not necessary to keep loops, roads to the departure city, roads from the destination city, and from multiples only the longest road needs to be kept. On this basis, the mathematical model of this one-way road system can be simplified, so that the mathematical model is a oriented, weighted, labeled, cyclic, not necessarily connected graph <code>G&nbsp;=&nbsp;(V,&nbsp;E)</code> with weight function <code>w:&nbsp;E&nbsp;→&nbsp;R</code>, where <code>w(u,&nbsp;v)&nbsp;≥&nbsp;0</code> for all <code>(u,&nbsp;v)&nbsp;∈&nbsp;E</code>.</li>
-  <li>The vertices correspond to cities and the arcs to one-way roads. </li>
-  <li>The label of a vertex is the name of a city. </li>
-  <li>The arc <code>(u,&nbsp;v)</code> leads from the vertex <code>u</code> corresponding to the starting city to the vertex <code>v</code> corresponding to the city that is the end of the road.</li>
-  <li>The weight of the arc is the length of the road.</li>
-  <li>A path is a sequence of vertices of the graph.</li>
-  <li>A simple path is a path in which no vertex and no edge are repeated.</li>
-  <li>The length of a path connecting vertex <code>u</code> and any of other vertices is the sum of lengths of roads of this path, i.e. the sum of weights of graph arcs.</li>
-  <li>To find the maximal length of a path from a given city <code>u</code> to city <code>v</code> in a given road system <code>S</code>, we first have to make sure that at least one path exists from city <code>u</code> to city <code>v</code>. If such a path exists, then to find the maximum length of the path you need to determine the lengths of roads. We will sequentially look through the vertices of graph <code>G</code> starting from vertex <code>u</code> and look for paths (by calculating their lengths) from the starting vertex to vertex <code>v</code> until all paths leading to vertex <code>v</code> have been looked through. If vertex <code>v</code> is not reachable from vertex <code>u</code>, then there is no maximal path from <code>u</code> to <code>v</code>. To keep the found path simple, we will memorize the traversed vertices in the current path.</li>
-  <li>There can be several paths that satisfy the problem condition. To answer the question what is the maximal length of the path between two cities <code>A</code> and <code>B</code>, it is sufficient to find any of such paths (the last detected in the sequential order) and specify its length. </li>
-</ul>
+  * The mathematical model of a one-way road system is an oriented, weighted, labeled, cyclic, not necessarily connected, multi- and pseudograph `G&nbsp;=&nbsp;(V,&nbsp;E)` with weight function `w:&nbsp;E&nbsp;→&nbsp;R`, where `w(u,&nbsp;v)&nbsp;≥&nbsp;0` for all `(u,&nbsp;v)&nbsp;∈&nbsp;E`.
+  * To solve problem, it is not necessary to keep loops, roads to the departure city, roads from the destination city, and from multiples only the longest road needs to be kept. On this basis, the mathematical model of this one-way road system can be simplified, so that the mathematical model is a oriented, weighted, labeled, cyclic, not necessarily connected graph `G&nbsp;=&nbsp;(V,&nbsp;E)` with weight function `w:&nbsp;E&nbsp;→&nbsp;R`, where `w(u,&nbsp;v)&nbsp;≥&nbsp;0` for all `(u,&nbsp;v)&nbsp;∈&nbsp;E`.
+  * The vertices correspond to cities and the arcs to one-way roads.
+  * The label of a vertex is the name of a city.
+  * The arc `(u,&nbsp;v)` leads from the vertex `u` corresponding to the starting city to the vertex `v` corresponding to the city that is the end of the road.
+  * The weight of the arc is the length of the road.
+  * A path is a sequence of vertices of the graph.
+  * A simple path is a path in which no vertex and no edge are repeated.
+  * The length of a path connecting vertex `u` and any of other vertices is the sum of lengths of roads of this path, i.e. the sum of weights of graph arcs.
+  * To find the maximal length of a path from a given city `u` to city `v` in a given road system `S`, we first have to make sure that at least one path exists from city `u` to city `v`. If such a path exists, then to find the maximum length of the path you need to determine the lengths of roads. We will sequentially look through the vertices of graph `G` starting from vertex `u` and look for paths (by calculating their lengths) from the starting vertex to vertex `v` until all paths leading to vertex `v` have been looked through. If vertex `v` is not reachable from vertex `u`, then there is no maximal path from `u` to `v`. To keep the found path simple, we will memorize the traversed vertices in the current path.
+  * There can be several paths that satisfy the problem condition. To answer the question what is the maximal length of the path between two cities `A` and `B`, it is sufficient to find any of such paths (the last detected in the sequential order) and specify its length.
 
 ## Formal problem statement
 
-<ul>
-  <li>In a weighted, labeled, cyclic, not necessarily connected graph find the length of the longest simple path between two vertices.</li>
-  <li>If the road system consists of several connectivity components, then the desired path between two given cities will not exist if both given cities are in different connectivity components.</li>
-  <li>If a one-way road system contains only one city, or no departure and/or destination city, or the departure city is the same as the destination city, then there is no path to be sought.</li>
-  <li>If the one-way road system contains only two cities (departure and destination), then the problem is reduced to finding the longest road from the departure city to the destination city. Since in this problem it makes sense to save only the maximum of multiples of the road, the saved road will be the desired path.</li>
-  <li>If the system of one-way roads has more than two cities, then to find the maximum length of the path between the given cities we will look through the graph in depth, starting from the top of <code>start</code> (the beginning of the path). We will mark the vertices with labels as they pass through. The label will tell us if the vertex has been viewed before. We will return when every vertex adjacent to the current vertex is tagged or is the end of the path. The search ends when all paths from vertex <code>start</code> to vertex <code>finish</code> have been viewed.</li>
-  <li>The solution to this problem is to look at all paths from the next vertex adjacent to the start-city vertex to the destination-city vertex, which provides finding the path of maximal length.</li>
-</ul>
+  * In a weighted, labeled, cyclic, not necessarily connected graph find the length of the longest simple path between two vertices.
+  * If the road system consists of several connectivity components, then the desired path between two given cities will not exist if both given cities are in different connectivity components.
+  * If a one-way road system contains only one city, or no departure and/or destination city, or the departure city is the same as the destination city, then there is no path to be sought.
+  * If the one-way road system contains only two cities (departure and destination), then the problem is reduced to finding the longest road from the departure city to the destination city. Since in this problem it makes sense to save only the maximum of multiples of the road, the saved road will be the desired path.
+  * If the system of one-way roads has more than two cities, then to find the maximum length of the path between the given cities we will look through the graph in depth, starting from the top of `start` (the beginning of the path). We will mark the vertices with labels as they pass through. The label will tell us if the vertex has been viewed before. We will return when every vertex adjacent to the current vertex is tagged or is the end of the path. The search ends when all paths from vertex `start` to vertex `finish` have been viewed.
+  * The solution to this problem is to look at all paths from the next vertex adjacent to the start-city vertex to the destination-city vertex, which provides finding the path of maximal length.
 
 ## An algorithm for solving the problem
 
@@ -154,11 +140,9 @@ Input file example:
 
 ## An algorithm for finding the maximal path from vertex `start` to vertex `finish`
 
-<ul>
-  <li><code>S</code> is a stack. An element of the stack is a vertex, its distance and a pointer to the list of viewed vertices reachable from it.</li>
-  <li><code>Road</code> is the path found.</li>
-  <li><code>w</code> is the current distance.</li>
-</ul>
+  * `S` is a stack. An element of the stack is a vertex, its distance and a pointer to the list of viewed vertices reachable from it.
+  * `Road` is the path found.
+  * `w` is the current distance.
 
 `{`<br>
 `   S ← ∅; Road ← ∅;`<br>
@@ -209,12 +193,10 @@ Input file example:
 
 ## Road system input algorithm
 
-<ul>
-  <li><code>BR</code> is the beginning of the road.</li>
-  <li><code>ER</code> is the end of the road.</li>
-  <li><code>start</code> is the index of the departure city in the list of cities.</li>
-  <li><code>finish</code> is the index of the destination city in the list of cities.</li>
-</ul>
+  * `BR` is the beginning of the road.
+  * `ER` is the end of the road.
+  * `start` is the index of the departure city in the list of cities.
+  * `finish` is the index of the destination city in the list of cities.
 
 `{`<br> 
 `   if (the file did not open) return -1;`<br>
