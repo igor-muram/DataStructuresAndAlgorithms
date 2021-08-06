@@ -73,11 +73,11 @@ Input file example:
 
 ## Mathematical model
 
-  * The mathematical model of a one-way road system is an oriented, weighted, labeled, cyclic, not necessarily connected, multi- and pseudograph `G&nbsp;=&nbsp;(V,&nbsp;E)` with weight function `w:&nbsp;E&nbsp;→&nbsp;R`, where `w(u,&nbsp;v)&nbsp;≥&nbsp;0` for all `(u,&nbsp;v)&nbsp;∈&nbsp;E`.
-  * To solve problem, it is not necessary to keep loops, roads to the departure city, roads from the destination city, and from multiples only the longest road needs to be kept. On this basis, the mathematical model of this one-way road system can be simplified, so that the mathematical model is a oriented, weighted, labeled, cyclic, not necessarily connected graph `G&nbsp;=&nbsp;(V,&nbsp;E)` with weight function `w:&nbsp;E&nbsp;→&nbsp;R`, where `w(u,&nbsp;v)&nbsp;≥&nbsp;0` for all `(u,&nbsp;v)&nbsp;∈&nbsp;E`.
+  * The mathematical model of a one-way road system is an oriented, weighted, labeled, cyclic, not necessarily connected, multi- and pseudograph <code>G&nbsp;=&nbsp;(V,&nbsp;E)</code> with weight function <code>w:&nbsp;E&nbsp;→&nbsp;R</code>, where <code>w(u,&nbsp;v)&nbsp;≥&nbsp;0</code> for all <code>(u,&nbsp;v)&nbsp;∈&nbsp;E</code>.
+  * To solve problem, it is not necessary to keep loops, roads to the departure city, roads from the destination city, and from multiples only the longest road needs to be kept. On this basis, the mathematical model of this one-way road system can be simplified, so that the mathematical model is a oriented, weighted, labeled, cyclic, not necessarily connected graph <code>G&nbsp;=&nbsp;(V,&nbsp;E)</code> with weight function <code>w:&nbsp;E&nbsp;→&nbsp;R</code>, where <code>w(u,&nbsp;v)&nbsp;≥&nbsp;0</code> for all <code>(u,&nbsp;v)&nbsp;∈&nbsp;E</code>.
   * The vertices correspond to cities and the arcs to one-way roads.
   * The label of a vertex is the name of a city.
-  * The arc `(u,&nbsp;v)` leads from the vertex `u` corresponding to the starting city to the vertex `v` corresponding to the city that is the end of the road.
+  * The arc <code>(u,&nbsp;v)</code> leads from the vertex `u` corresponding to the starting city to the vertex `v` corresponding to the city that is the end of the road.
   * The weight of the arc is the length of the road.
   * A path is a sequence of vertices of the graph.
   * A simple path is a path in which no vertex and no edge are repeated.
