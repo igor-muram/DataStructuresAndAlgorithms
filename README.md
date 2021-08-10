@@ -53,17 +53,17 @@ Input file example:
 
 – adjacency structure (lists of adjacent vertices of the graph):
 
-`struct wtable`<br>
-`{`<br>
-`   int top;`<br>
-`   double weight;`<br>
-`   wtable *next;`<br>
-`};`<br>
-`vector<wtable*> wmas;`
+<pre>struct wtable
+{
+   int top;
+   double weight;
+   wtable *next;
+};
+vector<wtable*> wmas;</pre>
 
 – list of city names:
 
-`vector<string> cities;`
+<pre>vector<string> cities;</pre>
 
 ## External output representation
 
@@ -96,47 +96,46 @@ Input file example:
 
 ## An algorithm for solving the problem
 
-`{`<br>
-`   max ← 0, Road ← ∅;`<br>
-`   switch (enter information about the road system and create a graph adjacencies structure)`<br>
-`   {`<br>
-`      case 0:`<br>
-`         if (there are no simple ways out of the departure city)`<br>
-`            output "There are no simple ways out of the departure city";`<br>
-`         else`<br>
-`            if (number of cities == 2)`<br>
-`            {`<br>
-`               max ← the length of the road from the departure city to the destination city;`<br>
-`               Road ← road from the departure city to the destination city;`<br>
-`               output max, Road;`<br>
-`            }`<br>
-`            else`<br>
-`            {`<br>
-`               Road ← search for the maximum simple path between the given cities;`<br>
-`               max ← length of Road;`<br>
-`               if (max = 0)`<br>
-`                  output "There is no way from the departure city to the destination city";`<br>
-`               else`<br>
-`                  output max, Road;`<br>
-`               clearing the memory allocated for path storage;`<br>
-`            }`<br>
-`         break;`<br>
-`      case -1:`<br>
-`         output "The file with information about the road system was not found";`<br>
-`         break;`<br>
-`      case -2:`<br>
-`         output "The file with information about the road system is empty";`<br>
-`         break;`<br>
-`      case -3:`<br>
-`         output "The departure city is the same as the destination city";`<br>
-`         break;`<br>
-`     case -4:`<br>
-`         output "Departure city and/or destination city not found in the way";`<br>
-`         break;`<br>
-`   }`<br>
-   
-`   clearing the memory allocated for storing the list of cities and the list of adjacencies;`<br>
-`}`<br>
+<pre>{
+   max ← 0, Road ← ∅;
+   switch (enter information about the road system and create a graph adjacencies structure)
+   {
+      case 0:
+         if (there are no simple ways out of the departure city)
+            output "There are no simple ways out of the departure city";
+         else
+            if (number of cities == 2)
+            {
+               max ← the length of the road from the departure city to the destination city;
+               Road ← road from the departure city to the destination city;
+               output max, Road;
+            }
+            else
+            {
+               Road ← search for the maximum simple path between the given cities;
+               max ← length of Road;
+               if (max = 0)
+                  output "There is no way from the departure city to the destination city";
+               else
+                  output max, Road;
+               clearing the memory allocated for path storage;
+            }
+         break;
+      case -1:
+         output "The file with information about the road system was not found";
+         break;
+      case -2:
+         output "The file with information about the road system is empty";
+         break;
+      case -3:
+         output "The departure city is the same as the destination city";
+         break;
+     case -4:
+         output "Departure city and/or destination city not found in the way";
+         break;
+   }
+   clearing the memory allocated for storing the list of cities and the list of adjacencies;
+}</pre>
 
 ## An algorithm for finding the maximal path from vertex `start` to vertex `finish`
 
@@ -144,52 +143,52 @@ Input file example:
   * `Road` is the path found.
   * `w` is the current distance.
 
-`{`<br>
-`   S ← ∅; Road ← ∅;`<br>
-`   start ← start of the road;`<br>
-`   finish ← end of the road;`<br>
-`   x ← an unseen top adjacent to the start;`<br>
-`   while (∃x)`<br>
-`   {`<br>
-`      if (x == finish)`<br> 
-`      {`<br>
-`         if (w > max)`<br>
-`         {`<br>
-`            clear the path already saved;`<br>
-`            max ← w;`<br>
-`         }`<br>
-`         if (∃ other unseen vertices adjacent to the start)`<br> 
-`            x ← adjacent vertex;`<br>
-`         else`<br> 
-`            mark x as a viewed vertex;`<br>
-`      }`<br>
-`      in_stack (S, x, w);`<br>
-`      while (S is not empty)`<br> 
-`      {`<br>
-`         x ← the first element of S;`<br>
-`         y ← unseen vertex adjacent to x;`<br>
-`         if (y is not exist)`<br> 
-`            from_stack(S);`<br>
-`         else`<br>
-`            if (y == finish) `<br>
-`            {`<br>
-`               if (distance from start to y > max)`<br> 
-`               {`<br>
-`                  max ← distance from start to y;`<br>
-`                  Road ← road from start to y;`<br>
-`               }`<br>
-`               from_stack(S);`<br>
-`            }`<br>
-`            else`<br>
-`            {`<br>
-`               mark y as a viewed vertex;`<br> 
-`               in_stack (S, y, distance from start to y);`<br>
-`            }`<br>
-`      }`<br>
-`      x ← unseen vertex adjacent to start;`<br>
-`   }`<br>
-`   return Road;`<br>
-`}`
+<pre>{
+   S ← ∅; Road ← ∅;
+   start ← start of the road;
+   finish ← end of the road;
+   x ← an unseen top adjacent to the start;
+   while (∃x)
+   {
+      if (x == finish)
+      {
+         if (w > max)
+         {
+            clear the path already saved;
+            max ← w;
+         }
+         if (∃ other unseen vertices adjacent to the start)
+            x ← adjacent vertex;
+         else`
+            mark x as a viewed vertex;
+      }
+      in_stack (S, x, w);
+      while (S is not empty)
+      {
+         x ← the first element of S;
+         y ← unseen vertex adjacent to x;
+         if (y is not exist)
+            from_stack(S);
+         else
+            if (y == finish) 
+            {
+               if (distance from start to y > max)
+               {
+                  max ← distance from start to y;
+                  Road ← road from start to y;
+               }
+               from_stack(S);
+            }
+            else
+            {
+               mark y as a viewed vertex;
+               in_stack (S, y, distance from start to y);
+            }
+      }
+      x ← unseen vertex adjacent to start;
+   }
+   return Road;
+}</pre>
 
 ## Road system input algorithm
 
@@ -198,42 +197,42 @@ Input file example:
   * `start` is the index of the departure city in the list of cities.
   * `finish` is the index of the destination city in the list of cities.
 
-`{`<br> 
-`   if (the file did not open) return -1;`<br>
-`   if (could not read the departure city) return -2;`<br>
-`   enter the departure city and the destination city;`<br>
-`   if (departure city == destination city) return -3;`<br>
-`   while (not end of file)`<br>
-`   {`<br>
-`      input of BR;`<br>
-`      if (BR is not on the list of cities)`<br>
-`         add BR to the list of cities;`<br>
-`      input of ER;`<br>
-`      if (ER is not on the list of cities)`<br>
-`         add ER to the list of cities;`<br>
-`      input of the road length from BR to ER;`<br>
-`      if (the road is not a loop && does not go to the departure city && does not go from the destination city)`<br>
-`         if (the road from BR to ER is not on the list of adjacencies)`<br> 
-`            add the road from BR to ER to the list of adjacencies;`<br>
-`         else`<br>
-`            if (current road length > the length of the existing road from the BR to the ER)`<br>
-`              the length of the existing road from the BR to the ER ← current road length;`<br>
-`   }`<br>
-`   for (i ← 0; i < number of cities && count != 2; i++)`<br>
-`      if (cities[i] == departure city)`<br>
-`      {`<br>
-`         start = i;`<br>
-`         count++;`<br>
-`      }`<br>
-`      else`<br> 
-`         if (cities[i] == destination city)`<br>
-`         {`<br>
-`            finish = i;`<br>
-`            count++;`<br>
-`         }`<br>
-`   if (count != 2) return -4;`<br>
-`   return 0;`<br>
-`}`<br>
+<pre>{
+   if (the file did not open) return -1;
+   if (could not read the departure city) return -2;
+   enter the departure city and the destination city;
+   if (departure city == destination city) return -3;
+   while (not end of file)
+   {
+      input of BR;
+      if (BR is not on the list of cities)
+         add BR to the list of cities;
+      input of ER;
+      if (ER is not on the list of cities)
+         add ER to the list of cities;
+      input of the road length from BR to ER;
+      if (the road is not a loop && does not go to the departure city && does not go from the destination city)
+         if (the road from BR to ER is not on the list of adjacencies)
+            add the road from BR to ER to the list of adjacencies;
+         else
+            if (current road length > the length of the existing road from the BR to the ER)
+              the length of the existing road from the BR to the ER ← current road length;
+   }
+   for (i ← 0; i < number of cities && count != 2; i++)
+      if (cities[i] == departure city)
+      {
+         start = i;
+         count++;
+      }
+      else
+         if (cities[i] == destination city)
+         {
+            finish = i;
+            count++;
+         }
+   if (count != 2) return -4;
+   return 0;
+}</pre>
 
 ## Test 1
 `Purpose:` The file with information about the road system was not found.<br>
