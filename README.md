@@ -159,7 +159,7 @@ vector<wtable*> wmas;</pre>
          }
          if (∃ other unseen vertices adjacent to the start)
             x ← adjacent vertex;
-         else`
+         else
             mark x as a viewed vertex;
       }
       in_stack (S, x, w);
